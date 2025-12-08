@@ -1,5 +1,7 @@
 const std = @import("std");
-const User = @import("models/user.zig").User;
+const userModel = @import("models/user.zig");
+const User = userModel.User;
+const MAX_POWER = userModel.MAX_POWER;
 
 // This code won't compile if `main` isn't `pub`
 pub fn main() void {
