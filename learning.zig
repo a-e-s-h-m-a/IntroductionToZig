@@ -10,5 +10,7 @@ pub fn main() void {
         .name = "Goku",
     };
 
-    std.debug.print(" {s}'s power is {d}", .{ user.name, user.power });
+    std.debug.print(" {s}'s power is {d}\n", .{ user.name, user.power });
+    user.diagnose();
+    User.diagnose(user);
 }
