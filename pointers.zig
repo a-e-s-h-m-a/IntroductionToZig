@@ -5,11 +5,11 @@ pub fn main() void {
         .id = 1,
         .power = 100,
     };
-    user.power += 0;
+    //user.power += 0;
     
-    std.debug.print("main: {*}\n", .{&user});
+    //std.debug.print("main: {*}\n", .{&user});
     
-    levelUp(user);
+    levelUp(&user);
     std.debug.print("User {d} has power of {d}\n", .{ user.id, user.power });
 }
 
@@ -24,10 +24,8 @@ pub fn main() void {
 //     // i32@16b092a68
 // }
 
-fn levelUp(user: User) void {
-    std.debug.print("levelUp: {*}\n", .{&user});
-    var u = user;
-    u.power += 1;
+fn levelUp(user: *User) void {
+    user.power += 1;
 }
 
 pub const User = struct {
