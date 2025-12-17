@@ -25,6 +25,7 @@ pub fn main() void {
 // }
 
 fn levelUp(user: *User) void {
+    std.debug.print("{*}\n{*}\n", .{&user, user});
     user.power += 1;
 }
 
