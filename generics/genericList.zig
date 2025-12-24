@@ -20,7 +20,9 @@ fn List(comptime T: type) type {
         items: []T,
         allocator: Allocator,
         
-        fn init(allocator: Allocator) !List(T) {
+        const Self = @This();
+        
+        fn init(allocator: Allocator) !Self {
             return .{
                 .pos = 0,
                 .allocator = allocator,
@@ -28,11 +30,11 @@ fn List(comptime T: type) type {
             };
         }
         
-        fn deinit(self: List(T)) void {
+        fn deinit(self: Self) void {
             self.allocator.free(self.items);
         }
         
-        fn add(self: *List(T), value: T) !void {
+        fn add(self: *Self, value: T) !void {
             const pos = self.pos;
             const len = self.items.len;
             
