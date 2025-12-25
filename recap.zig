@@ -30,7 +30,16 @@ pub fn main() !void {
     const allocator = gpa.allocator();
     
     var lookup = std.StringHashMap(User).init(allocator);
-    defer lookup.deinit();
+    // replace the existing:
+    //   defer lookup.deinit();
+    // with:
+    defer {
+	var it = lookup.keyIterator();
+	while (it.next()) |key| {
+		allocator.free(key.*);
+	}
+	lookup.deinit();
+    }
     
     var buf: [30]u8 = undefined;
     var stdin = std.fs.File.stdin().reader(&buf);
@@ -46,7 +55,15 @@ pub fn main() !void {
         if(name.len == 0) {
             break;
         }
-        try lookup.put(name, .{ .power = i });
+        //try lookup.put(name, .{ .power = i });
+        // name should ne long lived
+        const owned_name = try allocator.dupe(u8, name);
+        try lookup.put(owned_name, .{ .power = i });
+    }
+    
+    var it = lookup.iterator();
+    while (it.next()) |kv| {
+        std.debug.print("{s} == {any}\n", .{kv.key_ptr.*, kv.value_ptr.*});
     }
 
     const has_leto = lookup.contains("Leto");
