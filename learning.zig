@@ -74,3 +74,8 @@ pub fn main() void {
 	//var i: usize = 0;
 	std.debug.print("{}\n", .{.{.year = 2023, .month = 8}});
 }
+
+const testing = std.testing;
+test "IntList: add" {
+    
+}
