@@ -2,6 +2,7 @@ const std = @import("std");
 const userModel = @import("models/user.zig");
 const User = userModel.User;
 const MAX_POWER = userModel.MAX_POWER;
+const calc = @import("calc");
 
 // This code won't compile if `main` isn't `pub`
 pub fn main() void {
@@ -73,6 +74,8 @@ pub fn main() void {
     //var i = 0; // comptime_int
     //var i: usize = 0;
     std.debug.print("{}\n", .{.{ .year = 2023, .month = 8 }});
+    
+    std.debug.print("calc : {any}\n", .{calc.add(1, 2)});
 }
 
 const testing = std.testing;

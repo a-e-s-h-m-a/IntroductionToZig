@@ -3,11 +3,18 @@ const std = @import("std");
 pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
+    
+    const calc_module = b.addModule("calc", .{
+        .root_source_file = b.path("calc/calc.zig"),
+    });
 
     const mod = b.createModule(.{
         .target = target,
         .optimize = optimize,
         .root_source_file = b.path("learning.zig"),
+        .imports = &.{
+            .{.name = "calc", .module = calc_module },
+        }
     });
     {
         // setup exe
