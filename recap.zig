@@ -19,6 +19,6 @@ pub fn main() !void {
     const entry = lookup.getPtr("Goku").?;
     std.debug.print("Goku's power is {d}\n", .{entry.power});
     
-    _ = lookup.remove("Goku");
+    //_ = lookup.remove("Goku");
     std.debug.print("Goku's power is {d}\n", .{entry.power});
 }
