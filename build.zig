@@ -4,9 +4,8 @@ pub fn build(b: *std.Build) !void {
     const target = b.standardTargetOptions(.{});
     const optimize = b.standardOptimizeOption(.{});
     
-    const calc_module = b.addModule("calc", .{
-        .root_source_file = b.path("calc/calc.zig"),
-    });
+    const calc_dep = b.dependency("calc", .{.target = target, .optimize = optimize});
+    const calc_module = calc_dep.module("calc");
 
     const mod = b.createModule(.{
         .target = target,
